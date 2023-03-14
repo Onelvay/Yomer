@@ -11,5 +11,5 @@
     <dt>What is a Yomer for?</dt>
     <dd>Yomer will serve to search for vacancies, internships, bootcamps, courses.</dd>
     <dt>Who needs Yomer?</dt>
-    <dd>Yomer is suitable for beginners software engineer.</dd>
+    <dd>Yomer is suitable for novice software engineer.</dd>
 </dl>
