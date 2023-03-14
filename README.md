@@ -1,7 +1,7 @@
 <h1>Yomer</h1>
   <p>description</p>
-<ol>
+<ul>
   <li>Кофе</li>
   <li>Чай</li>
   <li>Молоко</li>
-</ol>
+</ul>
