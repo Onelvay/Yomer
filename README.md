@@ -1,2 +1,2 @@
-<h1>Yomer/h1>
+<h1>Yomer</h1>
   <p>description</p>
