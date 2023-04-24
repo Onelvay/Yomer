@@ -2,9 +2,18 @@
   <nav>
     <div style="color:white;"><h1 >Yomer</h1></div>
     <ul>
-      <li><a [routerLink]="['/vacancy']">Профиль</a></li>
-      <li><a [routerLink]="['/profile']">Вакансии</a></li>
-      <li class="login"><a [routerLink]="['/login']">Войти</a></li>
+      <ng-container *ngIf="logged">
+        <li><a [routerLink]="['/profile']">Профиль</a></li>
+      </ng-container>
+      <li><a [routerLink]="['/']">Вакансии</a></li>
+      <li><a [routerLink]="['/companies']">Компании</a></li>
+      <ng-container *ngIf="!logged">
+        <li class="login"><a [routerLink]="['/login']">Войти</a></li>
+      </ng-container>
+      <ng-container *ngIf="logged">
+        <li>  <a (click)="logout()">Log out</a></li>
+      </ng-container>
+     
     </ul>
   </nav>
 </div>

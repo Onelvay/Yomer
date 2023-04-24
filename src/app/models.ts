@@ -13,6 +13,7 @@ export interface Vacancy{
     companyId: number,   
     companyName:string,
     direction:string,
+    description:string
 }
 export interface AuthToken {
     token: string;

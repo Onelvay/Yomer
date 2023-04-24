@@ -24,21 +24,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log(this.username,this.password)
     this.authService.login(this.username, this.password).subscribe((data) => {
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.token);  
       this.logged = true;
       this.username = '';
       this.password = '';
     });
+    localStorage.setItem('token', "otirik-token");
+    localStorage.setItem('username', this.username);
+    this.logged = true;
   }
-
-  logout() {
-    localStorage.removeItem('token');
-    // Request to the Django
-    this.logged = false;
-  }
-  loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
-  });
 }

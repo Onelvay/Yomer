@@ -20,11 +20,5 @@ export class AuthService {
       {username, password}
     )
   }
-  // sendTestToken(username: string, password: string) {
-  //   const testToken = 'myTestToken';
-  //   this.http.post('/api/authenticate', { token: testToken }).subscribe();
-  //   const req = this.httpTestingController.expectOne('/api/authenticate');
-  //   req.flush({ token: 'myResponseToken' });
-  // }    
   
 }

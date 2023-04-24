@@ -6,15 +6,17 @@ import { VacancyComponent } from './vacancy/vacancy.component';
 import { WhoCreatedComponent } from './who-created/who-created.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { CompanyComponent } from './company/company.component';
 const routes: Routes = [
   {path:'',component:MainPageComponent,children:[
     {path:'',redirectTo:'/',pathMatch:'full'},
-    {path:'',component:WhoCreatedComponent},
+    {path:'',component:VacancyComponent},
     { path:'profile',component:ProfileComponent,},
-    { path:'vacancy',component:VacancyComponent},
-    { path:'login',component:LoginComponent},
-    { path:'sign-up',component:SignUpComponent}
-  ]},
+    { path:'companies',component:CompanyComponent},
+  ],
+  },
+  { path:'login',component:LoginComponent},
+  { path:'sign-up',component:SignUpComponent}
 
 ];
 

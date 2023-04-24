@@ -1,2 +1,6 @@
-<p>vacancy works!</p>
+<div  *ngFor="let vacancy of vacancies,let i =index" >
+    <h1>{{vacancy.id}}</h1>
+    <h1>{{vacancy.description}}</h1>
+</div>
+
 <router-outlet></router-outlet>

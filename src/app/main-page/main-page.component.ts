@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
+  logged: boolean = false;
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.logged = true;
+    }
 
+  }
+  logout() {
+    localStorage.removeItem('token');
+    this.logged = false;
+  }
 }
