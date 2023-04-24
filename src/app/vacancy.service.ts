@@ -33,4 +33,7 @@ export class VacancyService {
   ]
   return arr
   }
+  submitVacancy(id:number,username:string){
+    return this.client.post<Vacancy>(`${this.BASE_URL}/api/vacancies`,{vacancy_id:id,username:username})
+  }
 }

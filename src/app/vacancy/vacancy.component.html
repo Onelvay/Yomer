@@ -1,6 +1,30 @@
-<div  *ngFor="let vacancy of vacancies,let i =index" >
-    <h1>{{vacancy.id}}</h1>
-    <h1>{{vacancy.description}}</h1>
-</div>
+<body>
+    <div class="card">
+        <div class="card-header">
+          <h2 class="name">{{vacancies[0].direction}}</h2>
+          <p class="direction">{{vacancies[0].companyName}}</p>
+        </div>
+        <div class="card-body">
+          <p class="description">{{vacancies[0].description}}</p>
+        </div>
+        <ng-container *ngIf="!logged">
+            <button style="background-color: #333; color:white;" (click)="submit(vacancies[0].id)" type="submit" class="btn">Подать заявку</button>
+        </ng-container>
+    </div>
+    <div class="card-grid">
+    <div *ngFor="let vacancy of vacancies.slice(1),let i =index"  class="card">
+        <div class="card-header">
+          <h2 class="name">{{vacancy.direction}}</h2>
+          <p class="direction">{{vacancy.companyName}}</p>
+        </div>
+        <div class="card-body">
+          <p class="description">{{vacancy.description}}</p>
+        </div>
+        <ng-container *ngIf="!logged">
+            <button style="background-color: #333; color:white;" (click)="submit(vacancies[0].id)" type="submit" class="btn">Подать заявку</button>
+        </ng-container>
+      </div>
+    </div>
+</body>
 
 <router-outlet></router-outlet>
