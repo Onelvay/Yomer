@@ -14,3 +14,6 @@ export interface Vacancy{
     companyName:string,
     direction:string,
 }
+export interface AuthToken {
+    token: string;
+  }

@@ -8,25 +8,37 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  logged: boolean = false;
+  username: string = '';
+  password: string = '';
+
+  constructor(private authService: AuthService) {}
+
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.logged = true;
+    }
+
+  }
+
+  login() {
+    this.authService.login(this.username, this.password).subscribe((data) => {
+      localStorage.setItem('token', data.token);
+      this.logged = true;
+      this.username = '';
+      this.password = '';
+    });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    // Request to the Django
+    this.logged = false;
+  }
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   });
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {}
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      
-      const { username, password } = this.loginForm.value;
-      console.log(username,password)
-      if(username && password){
-        this.authService.login(username, password).subscribe((data) => {
-          localStorage.setItem('access_token', data.access_token);
-        });      
-      }
-    }
-  }
 }

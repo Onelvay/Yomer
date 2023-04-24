@@ -1,6 +1,5 @@
-
 <div class="login-form">
-  <form  (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <form  (ngSubmit)="login()" [formGroup]="loginForm">
     <h2>Login</h2>
     <div class="form-group">
       <label for="username">Username</label>
@@ -12,4 +11,40 @@
     </div>
     <button type="submit" [disabled]="!loginForm.valid" class="btn">Submit</button>
   </form>
+  <p>Нет аккаунта?<a [routerLink]="['/login']">Log in</a></p>
 </div>
+<!-- 
+<h1>Categories</h1>
+
+<ng-container *ngIf="!logged">
+  <h2>Login form</h2>
+  <div>
+    <fieldset>
+      <label>Username: </label>
+      <input type="text" [(ngModel)]="username">
+    </fieldset>
+    <fieldset>
+      <label>Password: </label>
+      <input type="password" [(ngModel)]="password">
+    </fieldset>
+    <button (click)="login()">Login</button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="logged">
+  <button (click)="logout()">Log out</button>
+  <h1>Welcome!</h1>
+  <fieldset>
+    <label>Category name: </label>
+    <input type="text" [(ngModel)]="newCategory">
+    <button (click)="addCategory()">Add category</button>
+  </fieldset>
+
+  <ul>
+    <li *ngFor="let category of categories">
+      {{category.id}} - {{category.name}}
+      <button (click)="deleteCategory(category.id)">X</button>
+    </li>
+  </ul>
+
+</ng-container> -->
