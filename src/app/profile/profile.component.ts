@@ -29,4 +29,7 @@ export class ProfileComponent {
     }
     
   }
+  deleteVacancy(id:number){
+    console.log(id)
+  }
 }

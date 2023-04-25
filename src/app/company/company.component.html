@@ -1,51 +1,6 @@
 <div  *ngFor="let company of companies,let i =index" >
-    <h1>{{company.id}}</h1>
-    <h1>{{company.name}}</h1>
+    <div class="card">
+      <h2 class="card-title">{{company.name}}</h2>
+      <!-- <a class="card-link" href="#">Вакансии данной компании</a> -->
+    </div>
 </div>
-<div class="card">
-    <div class="card-header">
-      <h2 class="name">Название</h2>
-      <p class="direction">Направление</p>
-    </div>
-    <div class="card-body">
-      <p class="description">Описание</p>
-    </div>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="name">Название</h2>
-        <p class="direction">Направление</p>
-      </div>
-      <div class="card-body">
-        <p class="description">Описание</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h2 class="name">Название</h2>
-        <p class="direction">Направление</p>
-      </div>
-      <div class="card-body">
-        <p class="description">Описание</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h2 class="name">Название</h2>
-        <p class="direction">Направление</p>
-      </div>
-      <div class="card-body">
-        <p class="description">Описание</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h2 class="name">Название</h2>
-        <p class="direction">Направление</p>
-      </div>
-      <div class="card-body">
-        <p class="description">Описание</p>
-      </div>
-    </div>
-  </div>

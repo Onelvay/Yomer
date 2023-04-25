@@ -13,6 +13,10 @@ export class VacancyComponent {
   logged: boolean = false;
   constructor(private vacancyService:VacancyService){}
   ngOnInit(){
+    const token =localStorage.getItem('token');
+    if(token){
+      this.logged=true;
+    }
       this.getVacancies();
   }
   getVacancies(){
