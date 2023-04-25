@@ -1,39 +1,67 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import { Company, Vacancy } from './models';
+import { Application, Company, Vacancy } from './models';
 @Injectable({
   providedIn: 'root'
 })
 export class VacancyService {
   BASE_URL = 'http://localhost:8000'
-  constructor(private client: HttpClient) { }
-  getVacancies(): Observable<Vacancy[]> 
-  {
-    return this.client.get<Vacancy[]>(
-      `${this.BASE_URL}/api/categories/`
-    )
-  }
-  getVacanciesNoBack() {
-    const arr:Vacancy[]=[{id:1,companyId:2,companyName:'Google',direction:'Go backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
-    {id:2,companyId:3,companyName:'Kolesa Group',direction:'Php backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
-    {id:3,companyId:4,companyName:'Kaspi',direction:'Angular frontend',description:"Фронтенд - разработка пользовательского интерфейса и его взаимодействия с бекендом в веб-приложении."},
-    {id:4,companyId:5,companyName:'Jusan',direction:'Django+Angular FullStack',description:"Фуллстек - специалист, который может разрабатывать как фронтенд, так и бекенд части приложения."},
-    {id:5,companyId:3,companyName:'Kolesa Group',direction:'DevOps',description:"Девопс - профессионал, отвечающий за развертывание, автоматизацию и управление инфраструктурой и приложениями в веб-среде."},
-    {id:6,companyId:6,companyName:'Halyk Market',direction:'Go backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
-  ]
-    return arr
-  }
-  getCompaniesTest(){
-    const arr:Company[]=[{id:2,name:'Google'},
+  jsonDataResult:any;
+  userVacancies:Vacancy[]=[];
+  companies:Company[]=[{id:2,name:'Google'},
   {id:3,name:'Kolesa Group'},
   {id:4,name:'Kaspi'},
   {id:5,name:'Jusan'},
   {id:6,name:'Halyk Market'},
   ]
-  return arr
+  vacancies:Vacancy[]=[{id:1,companyId:2,companyName:'Google',direction:'Go backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
+  {id:2,companyId:3,companyName:'Kolesa Group',direction:'Php backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
+  {id:3,companyId:4,companyName:'Kaspi',direction:'Angular frontend',description:"Фронтенд - разработка пользовательского интерфейса и его взаимодействия с бекендом в веб-приложении."},
+  {id:4,companyId:5,companyName:'Jusan',direction:'Django+Angular FullStack',description:"Фуллстек - специалист, который может разрабатывать как фронтенд, так и бекенд части приложения."},
+  {id:5,companyId:3,companyName:'Kolesa Group',direction:'DevOps',description:"Девопс - профессионал, отвечающий за развертывание, автоматизацию и управление инфраструктурой и приложениями в веб-среде."},
+  {id:6,companyId:6,companyName:'Halyk Market',direction:'Go backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
+]
+  constructor(private client: HttpClient) { }
+  getVacancies(): Observable<Vacancy[]> {
+    return this.client.get<Vacancy[]>(
+      `${this.BASE_URL}/api/categories/`
+    )
   }
-  submitVacancy(id:number,username:string){
-    return this.client.post<Vacancy>(`${this.BASE_URL}/api/vacancies`,{vacancy_id:id,username:username})
+  getCompanies(): Observable<Company[]> 
+  {
+    return this.client.get<Company[]>(
+      `${this.BASE_URL}/api/companies/`
+    )
+  }
+  getVacanciesNoBack() {
+    return this.vacancies
+  }
+  getCompaniesTest(){
+  return this.companies
+  }
+  addVacancy(id:number,username:string){
+    return this.client.post<Vacancy>(`${this.BASE_URL}/api/vacancy`,{vacancy_id:id,username:username})
+  }
+  addVacancyJSON(id:number,username:string){
+    this.client.post<Application>('assets/data.json',{username,id})
+  }
+  getUserVacancies(username:string): Observable<Vacancy[]> {
+    return this.client.get<Vacancy[]>(
+      `${this.BASE_URL}/api/vacancies?username=${{username}}`)
+  }
+  getUserVacanciesTest(username:string) {
+    let userVacancies:Vacancy[]=[]
+    this.client.get('assets/data.json').subscribe((res)=>{
+      this.jsonDataResult=res;
+      this.jsonDataResult.forEach((value:any,key:number) => {
+        if (value['username']==username){
+          userVacancies.push(this.vacancies[value['vacancyId']-1])
+          // console.log(this.userVacancies)
+        }
+      });
+      
+    })
+    return userVacancies
   }
 }

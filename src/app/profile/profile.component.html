@@ -1,4 +1,17 @@
 <ng-container *ngIf="logged">
-   <h1>{{username}}</h1>
+   <ng-container *ngIf="vacancies">
+      <h1>Ваши вакансии {{username}}</h1>
+      <div class="card-grid">
+         <div *ngFor="let vacancy of vacancies let i =index"  class="card">
+             <div class="card-header">
+               <h2 class="name">{{vacancy.direction}}</h2>
+               <p class="direction">{{vacancy.companyName}}</p>
+             </div>
+             <div class="card-body">
+               <p class="description">{{vacancy.description}}</p>
+             </div>
+           </div>
+         </div>
+   </ng-container>
 </ng-container>
 <router-outlet></router-outlet>

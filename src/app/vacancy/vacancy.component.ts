@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
 export class VacancyComponent {
   vacancies:Vacancy[]=[];
   logged: boolean = false;
-  constructor(private vacancyService:VacancyService,private authService: AuthService){}
+  constructor(private vacancyService:VacancyService){}
   ngOnInit(){
       this.getVacancies();
   }
@@ -20,17 +20,12 @@ export class VacancyComponent {
   }
   submit(id:number){
     const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
-    if (username && password){
-      this.authService.login(username, password).subscribe((data) => {
-        const token = localStorage.getItem('token');
-        if(token){
-          if (data.token==token){
-            this.vacancyService.submitVacancy(id,username)
-          }
-        }
-      });
+    if (username){
+      const token =localStorage.getItem('token');
+      if (token){
+        this.vacancyService.addVacancyJSON(id,username)
+        console.log(id,username)
+      }
     }
-    console.log(id)
   }
 }

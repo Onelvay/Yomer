@@ -17,4 +17,11 @@ export interface Vacancy{
 }
 export interface AuthToken {
     token: string;
-  }
+}
+export interface Status{
+    status:boolean;
+}
+export interface Application{
+    username:string;
+    vacancyId:number;
+}
