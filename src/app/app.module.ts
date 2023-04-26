@@ -16,6 +16,8 @@ import { AuthInterceptor } from './auth.interceptor';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CompanyComponent } from './company/company.component';
+import { CourseComponent } from './course/course.component';
+import { EventComponent } from './event/event.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { CompanyComponent } from './company/company.component';
     LoginComponent,
     SignUpComponent,
     CompanyComponent,
-
+    CourseComponent,
+    EventComponent,
   ],
   imports: [
     BrowserModule,

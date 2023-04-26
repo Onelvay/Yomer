@@ -1,5 +1,5 @@
 export interface User{
-    id: number,   
+    id: number,
     login:string,
     password:string,
     name: string,
@@ -10,10 +10,23 @@ export interface Company{
 }
 export interface Vacancy{
     id:number,
-    companyId: number,   
+    companyId: number,
     companyName:string,
     direction:string,
     description:string
+}
+export interface Course{
+  id:number,
+  courseName:string,
+
+  specialization:string,
+  url:string
+}
+export interface Event{
+  id:number,
+  eventName:string,
+  specialization:string,
+  url:string
 }
 export interface AuthToken {
     token: string;

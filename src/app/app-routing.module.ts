@@ -7,12 +7,16 @@ import { WhoCreatedComponent } from './who-created/who-created.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CompanyComponent } from './company/company.component';
+import { CourseComponent } from './course/course.component';
+import { EventComponent } from './event/event.component';
 const routes: Routes = [
   {path:'',component:MainPageComponent,children:[
     {path:'',redirectTo:'/',pathMatch:'full'},
     {path:'',component:VacancyComponent},
     { path:'profile',component:ProfileComponent,},
     { path:'companies',component:CompanyComponent},
+      { path:'courses',component:CourseComponent},
+      { path:'events',component:EventComponent},
   ],
   },
   { path:'login',component:LoginComponent},
