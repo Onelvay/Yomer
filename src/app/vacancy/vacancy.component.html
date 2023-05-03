@@ -1,10 +1,12 @@
 <body>
     <div class="card">
         <div class="card-header">
-          <h2 class="name">{{vacancies[0].direction}}</h2>
-          <p class="direction">{{vacancies[0].companyName}}</p>
+          <h2 class="name">{{vacancies[0].name}}</h2>
+          <p class="direction">{{vacancies[0].direction}}</p>
+         
         </div>
         <div class="card-body">
+          <p class="">{{vacancies[0].company}}</p>
           <p class="description">{{vacancies[0].description}}</p>
         </div>
         <ng-container *ngIf="logged">
@@ -14,10 +16,12 @@
     <div class="card-grid">
     <div *ngFor="let vacancy of vacancies.slice(1),let i =index"  class="card">
         <div class="card-header">
-          <h2 class="name">{{vacancy.direction}}</h2>
-          <p class="direction">{{vacancy.companyName}}</p>
+          <h2 class="name">{{vacancy.name}}</h2>
+          <p class="direction">{{vacancy.direction}}</p>
+         
         </div>
         <div class="card-body">
+          <p class="">{{vacancy.company}}</p>
           <p class="description">{{vacancy.description}}</p>
         </div>
         <ng-container *ngIf="logged">

@@ -10,10 +10,10 @@ export interface Company{
 }
 export interface Vacancy{
     id:number,
-    companyId: number,
-    companyName:string,
+    name:string,
     direction:string,
-    description:string
+    description:string,
+    company:string
 }
 export interface Course{
   id:number,
@@ -37,4 +37,11 @@ export interface Status{
 export interface Application{
     username:string;
     vacancyId:number;
+}
+export interface Company1{
+    id: number;
+    name: string;
+    description: string;
+    city: string;
+    address:string;
 }

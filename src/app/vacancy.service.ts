@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import { Application, Company, Vacancy } from './models';
+import { Application, Company, Vacancy ,Company1} from './models';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,27 +15,14 @@ export class VacancyService {
   {id:5,name:'Jusan'},
   {id:6,name:'Halyk Market'},
   ]
-  vacancies:Vacancy[]=[{id:1,companyId:2,companyName:'Google',direction:'Go backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
-  {id:2,companyId:3,companyName:'Kolesa Group',direction:'Php backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
-  {id:3,companyId:4,companyName:'Kaspi',direction:'Angular frontend',description:"Фронтенд - разработка пользовательского интерфейса и его взаимодействия с бекендом в веб-приложении."},
-  {id:4,companyId:5,companyName:'Jusan',direction:'Django+Angular FullStack',description:"Фуллстек - специалист, который может разрабатывать как фронтенд, так и бекенд части приложения."},
-  {id:5,companyId:3,companyName:'Kolesa Group',direction:'DevOps',description:"Девопс - профессионал, отвечающий за развертывание, автоматизацию и управление инфраструктурой и приложениями в веб-среде."},
-  {id:6,companyId:6,companyName:'Halyk Market',direction:'Go backend',description:"Бекенд - это серверная часть веб-приложения, которая отвечает за обработку запросов от клиентской части и взаимодействие с базой данных или другими внешними сервисами."},
-]
   constructor(private client: HttpClient) { }
   getVacancies(): Observable<Vacancy[]> {
     return this.client.get<Vacancy[]>(
-      `${this.BASE_URL}/api/categories/`
+      `${this.BASE_URL}/api/vacancies/`
     )
   }
-  getCompanies(): Observable<Company[]> 
-  {
-    return this.client.get<Company[]>(
-      `${this.BASE_URL}/api/companies/`
-    )
-  }
-  getVacanciesNoBack() {
-    return this.vacancies
+  getCompanies(): Observable<Company[]> {
+    return this.client.get<Company[]>(`${this.BASE_URL}/api/companies/`);
   }
   getCompaniesTest(){
   return this.companies
@@ -52,16 +39,6 @@ export class VacancyService {
   }
   getUserVacanciesTest(username:string) {
     let userVacancies:Vacancy[]=[]
-    this.client.get('assets/data.json').subscribe((res)=>{
-      this.jsonDataResult=res;
-      this.jsonDataResult.forEach((value:any,key:number) => {
-        if (value['username']==username){
-          userVacancies.push(this.vacancies[value['vacancyId']-1])
-          // console.log(this.userVacancies)
-        }
-      });
-      
-    })
     return userVacancies
   }
 }

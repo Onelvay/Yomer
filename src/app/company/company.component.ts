@@ -12,9 +12,11 @@ export class CompanyComponent {
   logged: boolean = false;
   constructor(private vacancyService:VacancyService){}
   ngOnInit(){
-      this.getVacancies();
+      this.getCompanies();
   }
-  getVacancies(){
-    this.companies = this.vacancyService.getCompaniesTest()
+  getCompanies(){
+    this.vacancyService.getCompanies().subscribe((companies)=>{
+      this.companies = companies;
+    })
   }
 }
