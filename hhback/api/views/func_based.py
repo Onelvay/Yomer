@@ -39,28 +39,21 @@ def create_user(request):
     )
 @api_view(['POST','DELETE'])
 def getUserVacancies(request):
-    if request.method == "POST":
-        serializer = UserAndVacancySerializer(data=request.data)
-        if serializer.is_valid():
-            uservacancies=UserAndVacancy.objects.all()
-            arr=[]
-            for i in uservacancies:
-                
-                if i.user_id==serializer.data['user_id']:
-                    print(i.user_id,i.vacancy_id)
-                    c=get_object_or_404(Vacancy,pk=i.vacancy_id)
-                    
-                    arr.append(c)
-            serialize1r = VacancySerializer(arr, many=True)
-            return Response(
-                {serialize1r.data},
-                status=status.HTTP_200_OK
-            )
-        return Response(
-                    {'status': 'bad request'},
-                    status=status.HTTP_400_BAD_REQUEST
-                ) 
-            
+    serializer = UserAndVacancySerializer(data=request.data)
+    if serializer.is_valid():
+        uservacancies=UserAndVacancy.objects.all()
+        vacancies=Vacancy.objects.all()
+        arr=[]
+        for i in uservacancies:
+
+            if i.user_id==serializer.data['user_id']:
+                # print(i.user_id,i.vacancy_id)
+                for v in vacancies:
+                    if str(v.id)==i.vacancy_id:
+                        arr.append(v)
+        serialize1r = VacancySerializer(arr, many=True)
+        return Response(serialize1r.data   )
+  
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

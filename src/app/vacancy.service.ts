@@ -25,8 +25,8 @@ export class VacancyService {
     this.client.post<Application>('assets/data.json',{username,id})
   }
   getUserVacancies(username:string): Observable<Vacancy[]> {
-    return this.client.get<Vacancy[]>(
-      `${this.BASE_URL}/api/vacancies?username=${{username}}`)
+    return this.client.post<Vacancy[]>(
+      `${this.BASE_URL}/api/uservacancies/`,{user_id:username,vacancy_id:"2"})
   }
   getUserVacanciesTest(username:string) {
     let userVacancies:Vacancy[]=[]

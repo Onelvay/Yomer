@@ -23,20 +23,20 @@ export class ProfileComponent {
       this.logged = true;
       console.log(token)
       const username=localStorage.getItem('username')
-      console.log(username)
       if (username){
         this.username=username
+        
       }
+      this.initVacancies()
+      
     }
     
   }
-  decodeToken(token: string): any {
-    try {
-      return jwt_decode(token);
-    } catch (Error) {
-      console.log(Error);
-      return null;
-    }
+  initVacancies(){
+    this.vacancyService.getUserVacancies(this.username).subscribe((data)=>{
+      this.vacancies=data
+      console.log(data)
+    })
   }
   deleteVacancy(id:number){
     console.log(id)
