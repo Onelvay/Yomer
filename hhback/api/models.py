@@ -30,3 +30,16 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return f"{self.name}:{self.company}"
+    
+class User(models.Model):
+    name=models.CharField(max_length=25,primary_key=True)
+    password=models.CharField(max_length=255)
+    vacancies = models.ManyToManyField(Vacancy)
+    class Meta:
+        verbose_name = "Users"
+
+class UserAndVacancy(models.Model):
+    vacancy_id = models.CharField(max_length=255)
+    user_id = models.CharField(max_length=255)
+    class Meta:
+        verbose_name = "Actions"

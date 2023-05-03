@@ -1,11 +1,66 @@
-from api.models import Company, Vacancy, companies, vacancies
-from api.serializers import CompanySerializer, VacancySerializer
+from api.models import Company, Vacancy, companies, vacancies,User,UserAndVacancy
+from api.serializers import CompanySerializer, VacancySerializer,UserSerializer,UserAndVacancySerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.contrib.auth.hashers import make_password
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import authenticate
+from rest_framework import generics, status
+from django.shortcuts import get_object_or_404
+@api_view(['POST'])
+def addVacancyToUser(request):  
+    serializer = UserAndVacancySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {'status': 'created'},
+            status=status.HTTP_201_CREATED
+        )
+    return Response(
+            {'status': 'bad request'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+@api_view(['POST'])
+def create_user(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {'data': serializer.data},
+            status=status.HTTP_201_CREATED
+        )
 
-
-# Create your views here.
+    return Response(
+        {'data': serializer.errors},
+        status=status.HTTP_400_BAD_REQUEST
+    )
+@api_view(['POST','DELETE'])
+def getUserVacancies(request):
+    if request.method == "POST":
+        serializer = UserAndVacancySerializer(data=request.data)
+        if serializer.is_valid():
+            uservacancies=UserAndVacancy.objects.all()
+            arr=[]
+            for i in uservacancies:
+                
+                if i.user_id==serializer.data['user_id']:
+                    print(i.user_id,i.vacancy_id)
+                    c=get_object_or_404(Vacancy,pk=i.vacancy_id)
+                    
+                    arr.append(c)
+            serialize1r = VacancySerializer(arr, many=True)
+            return Response(
+                {serialize1r.data},
+                status=status.HTTP_200_OK
+            )
+        return Response(
+                    {'status': 'bad request'},
+                    status=status.HTTP_400_BAD_REQUEST
+                ) 
+            
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

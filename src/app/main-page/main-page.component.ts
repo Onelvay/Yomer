@@ -16,6 +16,7 @@ export class MainPageComponent {
   }
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     this.logged = false;
   }
 }

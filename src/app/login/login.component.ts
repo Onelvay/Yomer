@@ -24,15 +24,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.username,this.password)
     this.authService.login(this.username, this.password).subscribe((data) => {
-      localStorage.setItem('token', data.token);  
+      localStorage.setItem('token', data.access);
+      localStorage.setItem('username', this.username);   
       this.logged = true;
-      this.username = '';
-      this.password = '';
+      console.log(this.username)
     });
-    localStorage.setItem('token', "otirik-token");
-    localStorage.setItem('username', this.username);
-    this.logged = true;
   }
 }

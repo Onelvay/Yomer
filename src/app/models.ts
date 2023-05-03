@@ -1,8 +1,6 @@
 export interface User{
-    id: number,
-    login:string,
+    username: string,
     password:string,
-    name: string,
 }
 export interface Company{
     id:number,
@@ -29,10 +27,11 @@ export interface Event{
   url:string
 }
 export interface AuthToken {
-    token: string;
+    refresh: string;
+    access:string;
 }
 export interface Status{
-    status:boolean;
+    status:string;
 }
 export interface Application{
     username:string;

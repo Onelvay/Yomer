@@ -3,6 +3,7 @@ import { Vacancy } from '../models';
 import { AuthService } from '../auth.service';
 import { VacancyService } from '../vacancy.service';
 import { HttpClient } from '@angular/common/http';
+import jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -18,16 +19,24 @@ export class ProfileComponent {
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
     if (token) {
       this.logged = true;
-    }
-    if (username){
-      this.username=username
-      this.vacancies=this.vacancyService.getUserVacanciesTest(username)
-     console.log(this.vacancies)
+      console.log(token)
+      const username=localStorage.getItem('username')
+      console.log(username)
+      if (username){
+        this.username=username
+      }
     }
     
+  }
+  decodeToken(token: string): any {
+    try {
+      return jwt_decode(token);
+    } catch (Error) {
+      console.log(Error);
+      return null;
+    }
   }
   deleteVacancy(id:number){
     console.log(id)

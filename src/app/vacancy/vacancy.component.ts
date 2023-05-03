@@ -27,11 +27,15 @@ export class VacancyComponent {
   }
   submit(id:number){
     const username = localStorage.getItem('username');
+    console.log(username)
     if (username){
       const token =localStorage.getItem('token');
       if (token){
-        this.vacancyService.addVacancyJSON(id,username)
-        console.log(id,username)
+        this.vacancyService.addVacancy(id,username).subscribe((status)=>{
+          if(status){
+            console.log(status)
+          }
+        })
       }
     }
   }
